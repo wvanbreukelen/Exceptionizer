@@ -1,0 +1,13 @@
+{
+    "name": "wvanbreukelen/exceptionizer",
+    "description": "An extendable exception handler for PHP",
+    "require": {
+        "filp/whoops": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "wvanbreukelen",
+            "email": "alopski@gmail.com"
+        }
+    ]
+}
