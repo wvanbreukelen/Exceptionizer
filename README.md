@@ -18,3 +18,32 @@ To register Exceptionizer as a exception handler, you may use the following meth
 $ec->register();
 ```
 And you are done!
+
+### Extending Exceptionizer
+Exceptionizer comes with a standard installed exception handler, called Whoops. Your program would run perfectly fine on this realiable platform.
+The may reason for me to build Exceptionizer is that I was looking for a way to improve logging support into my framework, but this was a difficult job to do in Whoops itself.
+
+To extend Exceptionizer with additional modules, please use the following
+
+#### Extending by calling a class method or running a anomynous function
+
+For anonymous function
+```php
+$en->addExceptionAction(function($exception) {
+	echo "<b>Some error occurred: </b>" . $exception;
+});
+```
+
+For calling a class
+```php
+$en->addExceptionAction(array(ClassInstance, Method));
+```
+
+#### Implement another whole exception handler into Exceptionizer
+```php
+$en->addImplementor(new Exceptionizer\Implement\WhoopsImplementor);
+```
+In this example, the pre-given Whoops Implenmentor has been used
+
+It is possible to add multiple actions for one exception, they will be executed in row order.
+
