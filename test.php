@@ -1,10 +1,6 @@
 <?php
 
 require('vendor/autoload.php');
-require('Exceptionizer.php');
-require('Implement/ImplementorInterface.php');
-require('Implement/Implementor.php');
-require('Implement/Whoops.php');
 
 $en = new Exceptionizer('TestApp');
 

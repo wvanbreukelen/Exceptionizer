@@ -4,6 +4,9 @@
     "require": {
         "filp/whoops": "^1.1"
     },
+    "autoload": {
+        "classmap": ["."]
+    },
     "authors": [
         {
             "name": "wvanbreukelen",
