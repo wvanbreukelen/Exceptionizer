@@ -43,7 +43,7 @@ $en->addExceptionAction(array(ClassInstance, Method));
 ```php
 $en->addImplementor(new Exceptionizer\Implement\WhoopsImplementor);
 ```
-In this example, the pre-given Whoops Implenmentor has been used
+In this example, the pre-given Whoops Implementor has been used
 
 It is possible to add multiple actions for one exception, they will be executed in row order.
 
