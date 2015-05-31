@@ -31,7 +31,6 @@ class Exceptionizer
 	{
 		foreach ($this->actions as $action)
 		{
-			print_r($action);
 			$this->triggerAction($action, $exception);
 		}
 	}
