@@ -7,11 +7,9 @@ $en = new Exceptionizer('TestApp');
 $en->register();
 
 $en->addExceptionAction(function($exception) {
-	echo "<b>Exception: </b>" . $exception;
+	//die(1);	
 });
 
-$en->addImplementor(new Exceptionizer\Implement\WhoopsImplementor);
+//$en->addImplementor(new Exceptionizer\Implement\WhoopsImplementor);
 
 throw new Exception("This is a test exception!!!");
-
-$en->trigger();
