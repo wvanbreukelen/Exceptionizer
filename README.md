@@ -7,9 +7,9 @@ To install Exceptionizer, download the source (by git or ZIP file) and run compo
 ### Create a Exceptionizer instance
 First, please include your composer autoload file (vendor/autoload.php) in your project.
 
-Then, use the following example to create a new instance. The first argument contains your application name
+Then, use the following example to create a new instance. If you supply the true boolean to the constructor, the handler will be automatically been loaded (no need to run the register method again)
 ```php
-$ec = new Exceptionizer('MyApp');
+$ec = new Exceptionizer();
 ```
 
 ### Register Exceptionizer
@@ -51,4 +51,9 @@ It is possible to add multiple actions for one exception, they will be executed 
 To restore the default PHP's build-in exception handler, use the revert method
 ```php
 $ec->revert();
+```
+
+To also remove all registered actions, please use the following
+```php
+$ec->revert(true);
 ```
