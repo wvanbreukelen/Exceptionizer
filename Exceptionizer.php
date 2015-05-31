@@ -3,48 +3,52 @@
 class Exceptionizer
 {
 
-	/**
-	 * Contains the name of your app
-	 * @var string
-	 */
-	protected $app;
+	const EXCEPTION_HANDLER = "handleException";
+	const ERROR_HANDLER = "handleError";
 
 	/**
-	 * Contains all registered actions that will be triggered when a exception is thrown
+	 * Contains all registered exception actions that will be triggered when a exception is thrown
 	 * @var array
 	 */
-	protected $actions = array();
+	protected $exceptionActions = array();
 
 	/**
 	 * Construct a new Exceptionizer instance
 	 * @param string $app The name of your application
 	 */
-	public function __construct($app)
+	public function __construct($register = false)
 	{
-		$this->app = $app;
+		if ($register) $this->register();
 	}
 
 	/**
 	 * Register the Exceptionizer exception handler
 	 * @return mixed
 	 */
-	public function register()
+	public function register($errors = true)
 	{
-		set_exception_handler(array($this, 'handleException'));
+		set_exception_handler(array($this, self::EXCEPTION_HANDLER));
+
+		if ($errors) 
+		{
+			set_error_handler(array($this, self::ERROR_HANDLER));
+		}
 	}
 
 	/**
 	 * Revert to the stock PHP exception handler
-	 * @param  string $withactions Revert all the added actions
+	 * @param  string $withexceptionActions Revert all the added exceptionActions
 	 * @return mixed               
 	 */
-	public function revert($withactions = false)
+	public function revert($withActions = false)
 	{
 		restore_exception_handler();
+		restore_error_handler();
 
-		if ($withactions)
+		if ($withexceptionActions)
 		{
-			unset($this->actions);
+			unset($this->exceptionActions);
+			unset($this->errorActions);
 		}
 	}
 
@@ -55,7 +59,7 @@ class Exceptionizer
 	 */
 	public function trigger($exception = null)
 	{
-		foreach ($this->actions as $action)
+		foreach ($this->exceptionActions as $action)
 		{
 			$this->triggerAction($action, $exception);
 		}
@@ -67,8 +71,9 @@ class Exceptionizer
 	 */
 	public function addExceptionAction($action)
 	{
-		$this->actions[] = $action;
+		$this->exceptionActions[] = $action;
 	}
+
 
 	/**
 	 * Unset a exception action
@@ -77,11 +82,12 @@ class Exceptionizer
 	 */
 	public function unsetExceptionAction($action)
 	{
-		if (($key = array_search($action, $this->actions)) !== false) 
+		if (($key = array_search($action, $this->exceptionActions)) !== false) 
 		{
-    		unset($this->actions[$key]);
+    		unset($this->exceptionActions[$key]);
 		}
 	}
+
 
 	/**
 	 * Add a implementor to Exceptionizer
@@ -102,6 +108,18 @@ class Exceptionizer
 	public function handleException($exception)
 	{
 		$this->trigger($exception);
+	}
+
+	/**
+	 * The default method that will be triggered when an error was thrown
+	 * @param  sobject $exception The exception that was thrown
+	 * @return mixed The request will be killed after this complete execution of this method
+	 */
+	public function handleError($level, $message, $file = null, $line = null)
+	{
+		$exception = new ErrorException($message, /*code*/ $level, /*severity*/ $level, $file, $line);
+
+		$this->handleException($exception);
 	}
 
 	/**
