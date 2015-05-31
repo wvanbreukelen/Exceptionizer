@@ -17,6 +17,16 @@ class Exceptionizer
 		set_exception_handler(array($this, 'handleException'));
 	}
 
+	public function revert($withactions = false)
+	{
+		restore_exception_handler();
+
+		if ($withactions)
+		{
+			unset($this->actions);
+		}
+	}
+
 	public function trigger($exception = null)
 	{
 		foreach ($this->actions as $action)

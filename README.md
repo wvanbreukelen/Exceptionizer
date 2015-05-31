@@ -47,3 +47,8 @@ In this example, the pre-given Whoops Implementor has been used
 
 It is possible to add multiple actions for one exception, they will be executed in row order.
 
+### Restore build-in exception handler
+To restore the default PHP's build-in exception handler, use the revert method
+```php
+$ec->revert();
+```
