@@ -53,7 +53,7 @@ To restore the default PHP's build-in exception handler, use the revert method
 $ec->revert();
 ```
 
-To also remove all registered actions, please use the following
+To also remove all registered actions, please pass through the true boolean
 ```php
 $ec->revert(true);
 ```
