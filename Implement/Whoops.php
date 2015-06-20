@@ -18,7 +18,7 @@ class WhoopsImplementor extends Implementor
 
         if (!class_exists("\\Whoops\\Run"))
         {
-        	throw new Exception("Cannot implement Whoops, make sure that composer is run");
+        	throw new Exception("Cannot implement Whoops, make sure that composer is run and Whoops is added to your project");
         }
 
         $ec = $this->getExceptionizer();
