@@ -29,7 +29,7 @@ class Exceptionizer
 	{
 		set_exception_handler(array($this, self::EXCEPTION_HANDLER));
 
-		if ($errors) 
+		if ($errors)
 		{
 			set_error_handler(array($this, self::ERROR_HANDLER));
 		}
@@ -38,7 +38,7 @@ class Exceptionizer
 	/**
 	 * Revert to the stock PHP exception handler
 	 * @param  string $withexceptionActions Revert all the added exceptionActions
-	 * @return mixed               
+	 * @return mixed
 	 */
 	public function revert($withActions = false)
 	{
@@ -47,15 +47,20 @@ class Exceptionizer
 
 		if ($withexceptionActions)
 		{
-			unset($this->exceptionActions);
-			unset($this->errorActions);
+			$this->unsetActions();
 		}
+	}
+
+	public function unsetActions()
+	{
+		unset($this->exceptionActions);
+		unset($this->errorActions);
 	}
 
 	/**
 	 * Trigger all the action for an exception
 	 * @param  object $exception The exception that was thrown
-	 * @return mixed           
+	 * @return mixed
 	 */
 	public function trigger($exception = null)
 	{
@@ -78,11 +83,11 @@ class Exceptionizer
 	/**
 	 * Unset a exception action
 	 * @param  string $action The action you want to unset
-	 * @return mixed         
+	 * @return mixed
 	 */
 	public function unsetExceptionAction($action)
 	{
-		if (($key = array_search($action, $this->exceptionActions)) !== false) 
+		if (($key = array_search($action, $this->exceptionActions)) !== false)
 		{
     		unset($this->exceptionActions[$key]);
 		}
