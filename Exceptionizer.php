@@ -45,7 +45,7 @@ class Exceptionizer
 		restore_exception_handler();
 		restore_error_handler();
 
-		if ($withexceptionActions)
+		if ($withActions)
 		{
 			$this->unsetActions();
 		}
