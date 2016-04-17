@@ -6,8 +6,8 @@ class WhoopsImplementor extends Implementor
 {
 
 	const EXCEPTION_HANDLER = "handleException";
-    const ERROR_HANDLER     = "handleError";
-    const SHUTDOWN_HANDLER  = "handleShutdown";
+    	const ERROR_HANDLER     = "handleError";
+	const SHUTDOWN_HANDLER  = "handleShutdown";
 
 	public function register()
 	{
