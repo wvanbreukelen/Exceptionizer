@@ -19,6 +19,23 @@ $ec->register();
 ```
 And you are done!
 
+### Example
+
+```php
+<?php
+
+require('vendor/autoload.php');
+
+$en = new Exceptionizer('TestApp');
+
+$en->register();
+
+$en->addImplementor(new Exceptionizer\Implement\WhoopsImplementor);
+
+// Throw your custom exceptions under here, or just commend out the following
+// throw new Exception("This is just an test exception");
+```
+
 ### Extending Exceptionizer
 Exceptionizer comes with a standard installed exception handler, called Whoops. Your program would run perfectly fine on this realiable platform.
 The may reason for me to build Exceptionizer is that I was looking for a way to improve logging support into my framework, but this was a difficult job to do in Whoops itself.
